@@ -55,6 +55,7 @@ export const Component = React.memo(() => {
         {displayStickyWindowsSeparately && <Stickies display={display} />}
         {spaces.map((space, i) => {
           const { label, index } = space;
+          // console.log("space: " + label );
           const lastOfSpace =
             i !== 0 && space.display !== spaces[i - 1].display;
 

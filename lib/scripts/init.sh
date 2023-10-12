@@ -10,15 +10,16 @@ if [ $? -eq 1 ]; then
   exit 0
 fi
 
+# spaces=$($yabai_path -m query --spaces)
+# spaces=$($yabai_path -m query --spaces | jq -c 'sort_by(.label | map(tonumber))')
+spaces=$($yabai_path -m query --spaces | jq -c 'sort_by(.label | (select(. != "") // "0:" | split(":")[0] | tonumber))')
+windows=$($yabai_path -m query --windows | sed 's/\\.//g; s/\n//g')
+displays=$($yabai_path -m query --displays)
 SIP=$(csrutil status)
 shadow_enabled=$($yabai_path -m config window_shadow)
 
-spaces=$($yabai_path -m query --spaces)
-windows=$($yabai_path -m query --windows)
-displays=$($yabai_path -m query --displays)
-
 if [ -z "$spaces" ]; then
-    spaces=$($yabai_path -m query --spaces)
+  spaces=$($yabai_path -m query --spaces | jq -c 'sort_by(.label | (select(. != "") // "0:" | split(":")[0] | tonumber))')
 fi
 
 if [ -z "$windows" ]; then

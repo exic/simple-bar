@@ -107,6 +107,7 @@ function render({ output, error }) {
   if (!data) return <Error.Component type="noData" classes={baseClasses} />;
 
   const { displays, shadow, skhdMode, SIP, spaces, windows } = data;
+  // console.log(spaces.map((x, i) => x.id) )
 
   const SIPDisabled = SIP !== "System Integrity Protection status: enabled.";
 
