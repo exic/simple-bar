@@ -13,7 +13,7 @@ fi
 # spaces=$($yabai_path -m query --spaces)
 # spaces=$($yabai_path -m query --spaces | jq -c 'sort_by(.label | map(tonumber))')
 spaces=$($yabai_path -m query --spaces | jq -c 'sort_by(.label | (select(. != "") // "0:" | split(":")[0] | tonumber))')
-windows=$($yabai_path -m query --windows | sed 's/\\.//g; s/\n//g')
+windows=$($yabai_path -m query --windows | sed 's/\\.//g')
 displays=$($yabai_path -m query --displays)
 SIP=$(csrutil status)
 shadow_enabled=$($yabai_path -m config window_shadow)
@@ -25,6 +25,8 @@ fi
 if [ -z "$windows" ]; then
     windows=$($yabai_path -m query --windows | sed 's/\\.//g;')
 fi
+
+windows=$(echo $windows | tr -d '\n')
 
 if [ -z "$displays" ]; then
     displays=$($yabai_path -m query --displays)
