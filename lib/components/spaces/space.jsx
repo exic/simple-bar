@@ -108,7 +108,7 @@ export default function Space({
   const hidden =
     !(hasFocus ?? __legacyHasFocus) &&
     !(isVisible ?? __legacyHasFocus) &&
-    !allApps.length &&
+    !apps.length &&
     spacesDisplay.hideEmptySpaces;
 
   if (hidden) return null;
